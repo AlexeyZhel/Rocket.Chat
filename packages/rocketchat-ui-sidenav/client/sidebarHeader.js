@@ -14,6 +14,8 @@ const setStatus = (status) => {
 	popover.close();
 };
 
+let lastSelectedEmoji = 'emoji-happy';
+
 const dataMoodClicks = {
 	happy: 0,
 	sad: 0,
@@ -21,8 +23,16 @@ const dataMoodClicks = {
 	confused: 0,
 };
 
+const emojiesMap = {
+	happy: 'emoji-happy',
+	sad: 'emoji-sad',
+	uncertain: 'emoji-uncertain',
+	confused: 'emoji-confused',
+};
+
 const updateMoodClick = (key) => {
 	dataMoodClicks[key] += 1;
+	lastSelectedEmoji = emojiesMap[key];
 	popover.close();
 };
 
@@ -97,7 +107,7 @@ export const toolbarSearch = {
 const toolbarButtons = (user) => [
 	{
 		name: t('User Mood'),
-		icon: 'emoji-happy',
+		icon: lastSelectedEmoji,
 		action: (e) => {
 			const config = {
 				popoverClass: 'sidebar-header',
